@@ -1,4 +1,4 @@
-# Using multiple workspaces:
+//# Using multiple workspaces:
 //terraform {
 //  backend "remote" {
 //    hostname = "atlas.hashicorp.com"

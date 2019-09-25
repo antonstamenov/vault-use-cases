@@ -11,7 +11,7 @@ resource "aws_instance" "vault-node" {
     "vault-cluster" = "vault-use-cases"
   }
 
-  user_data = file("user_data.yml")
+  user_data_base64 = data.template_cloudinit_config.vault-nodes.rendered
 }
 
 resource "aws_security_group" "vault-nodes" {
