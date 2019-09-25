@@ -4,7 +4,7 @@ resource "aws_instance" "vault-node" {
   instance_type        = "t2.micro"
   subnet_id            = module.vpc.private_subnets[0]
   key_name             = "helecloud"
-  iam_instance_profile = aws_iam_instance_profile.ssm.id
+  iam_instance_profile = aws_iam_instance_profile.vault-nodes.name
 
   tags = {
     "Name"          = "vault-node${count.index}"

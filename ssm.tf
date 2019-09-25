@@ -1,6 +1,6 @@
-resource "aws_iam_instance_profile" "ssm" {
-  name = "ssm-ssh-proxy"
-  role = aws_iam_role.ssm-ssh-proxy
+resource "aws_iam_instance_profile" "vault-nodes" {
+  name = "vote-nodes"
+  role = aws_iam_role.ssm-ssh-proxy.name
 }
 
 resource "aws_iam_role" "ssm-ssh-proxy" {
