@@ -10,6 +10,8 @@ resource "aws_instance" "vault-node" {
     "Name"          = "vault-node${count.index}"
     "vault-cluster" = "vault-use-cases"
   }
+
+  user_data = file("user_data.yml")
 }
 
 resource "aws_security_group" "vault-nodes" {
