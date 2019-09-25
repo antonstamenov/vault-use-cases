@@ -1,5 +1,5 @@
 provider "tfe" {
-  hostname = "atlas.hashicorp.com"
+  hostname = "app.terraform.io"
 }
 
 data tfe_workspace "vault-use-cases" {
