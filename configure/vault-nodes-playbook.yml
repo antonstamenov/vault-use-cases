@@ -1,5 +1,6 @@
 ---
 - name: A vote-nodes setup
+  hosts: all
   tasks:
     - name: Create a file called '/tmp/testfile.txt' with the content 'hello world'.
       copy:
