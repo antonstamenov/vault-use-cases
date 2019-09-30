@@ -45,7 +45,6 @@ resource "aws_launch_template" "vault-nodes" {
   name_prefix   = "vault-node-"
   iam_instance_profile {
     name = aws_iam_instance_profile.vault-nodes.name
-    arn  = aws_iam_instance_profile.vault-nodes.arn
   }
   security_group_names = [aws_security_group.vault-nodes.name]
 
