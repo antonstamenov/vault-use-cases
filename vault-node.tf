@@ -14,6 +14,22 @@ resource "aws_instance" "vault-node" {
   user_data_base64 = data.template_cloudinit_config.vault-nodes.rendered
 }
 
+
+resource "aws_instance" "vault-node-tbd" {
+  count                = 1
+  ami                  = data.aws_ami.amazon-linux-2.id
+  instance_type        = "t2.micro"
+  subnet_id            = module.vpc.private_subnets[0]
+  key_name             = "helecloud"
+  iam_instance_profile = aws_iam_instance_profile.vault-nodes.name
+
+  tags = {
+    "Name"          = "vault-node-tdb"
+    "vault-cluster" = "vault-use-cases"
+  }
+}
+
+
 resource "aws_security_group" "vault-nodes" {
   name = "vault-nodes"
 }
