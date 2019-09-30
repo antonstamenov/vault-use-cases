@@ -54,7 +54,8 @@ resource "aws_launch_template" "vault-nodes" {
 }
 
 resource "aws_security_group" "vault-nodes" {
-  name = "vault-nodes"
+  name   = "vault-nodes"
+  vpc_id = module.vpc.vpc_id
 }
 
 data "aws_ami" "amazon-linux-2" {
