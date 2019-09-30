@@ -51,6 +51,7 @@ resource "aws_launch_template" "vault-nodes" {
   lifecycle {
     create_before_destroy = true
   }
+  depends_on = [aws_security_group.vault-nodes]
 }
 
 resource "aws_security_group" "vault-nodes" {
