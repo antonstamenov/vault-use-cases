@@ -39,11 +39,14 @@ resource "aws_lb_target_group" "vault-nodes" {
 }
 
 resource "aws_launch_template" "vault-nodes" {
-  image_id             = data.aws_ami.amazon-linux-2.id
-  instance_type        = "t2.micro"
-  key_name             = "helecloud"
-  name_prefix          = "vault-node-"
-  iam_instance_profile = aws_iam_instance_profile.vault-nodes.name
+  image_id      = data.aws_ami.amazon-linux-2.id
+  instance_type = "t2.micro"
+  key_name      = "helecloud"
+  name_prefix   = "vault-node-"
+  iam_instance_profile {
+    name = aws_iam_instance_profile.vault-nodes.name
+    arn  = aws_iam_instance_profile.vault-nodes.arn
+  }
   security_groups = [
   aws_security_group.vault-nodes.name]
 
