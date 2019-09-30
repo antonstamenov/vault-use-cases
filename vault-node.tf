@@ -47,8 +47,7 @@ resource "aws_launch_template" "vault-nodes" {
     name = aws_iam_instance_profile.vault-nodes.name
     arn  = aws_iam_instance_profile.vault-nodes.arn
   }
-  security_groups = [
-  aws_security_group.vault-nodes.name]
+  security_group_names = [aws_security_group.vault-nodes.name]
 
   lifecycle {
     create_before_destroy = true
