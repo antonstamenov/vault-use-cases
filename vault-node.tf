@@ -1,15 +1,25 @@
-resource "aws_instance" "vault-node" {
-  count                = 1
-  ami                  = data.aws_ami.amazon-linux-2.id
-  instance_type        = "t2.micro"
-  subnet_id            = module.vpc.private_subnets[0]
-  key_name             = "helecloud"
-  iam_instance_profile = aws_iam_instance_profile.vault-nodes.name
+resource "aws_autoscaling_group" "vault-cluster" {
+  name                 = "vault-cluster"
+  desired_capacity     = 1
+  max_size             = 2
+  min_size             = 1
+  launch_configuration = aws_launch_configuration.vault-nodes.name
+}
 
+
+resource "aws_launch_configuration" "vault-nodes" {
+  image_id             = data.aws_ami.amazon-linux-2.id
+  instance_type        = "t2.micro"
+  key_name             = "helecloud"
+  name_prefix          = "vault-node-"
+  iam_instance_profile = aws_iam_instance_profile.vault-nodes.name
+  security_groups      = [aws_security_group.vault-nodes.name]
   tags = {
-    "Name"         = "vault-node${count.index}"
     "VaultCluster" = "vault-use-cases"
     "Environment"  = "poc"
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
