@@ -3,6 +3,7 @@
   environment:
     VAULT_ADDR: "http://127.0.0.1:8200"
   register: vault_status
+  failed_when: vault_status.rc > 2
 
 - name: Parse output of vault status
   set_fact:
