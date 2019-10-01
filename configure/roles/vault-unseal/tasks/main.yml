@@ -15,8 +15,7 @@
   with_fileglob: "{{ unseal_keys_dir_output }}/*"
   delegate_to: localhost
   become: no
-  when: ansible_facts['vault_status_parsed'].sealed
-
+  when: vault_status_parsed.sealed
 
 - name: Unseal vault with unseal keys
   shell: |
@@ -24,4 +23,4 @@
   environment:
     VAULT_ADDR: "http://127.0.0.1:8200"
   with_items: "{{unseal_keys.results}}"
-  when: ansible_facts['vault_status_parsed'].sealed
+  when: vault_status_parsed.sealed
