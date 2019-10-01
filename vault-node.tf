@@ -20,6 +20,14 @@ resource "aws_security_group" "vault-nodes" {
   vpc_id = module.vpc.vpc_id
 }
 
+resource "aws_security_group_rule" "vault-nodes-egress" {
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.vault-nodes.id
+  type              = "egress"
+}
+
 data "aws_ami" "amazon-linux-2" {
   most_recent = true
   owners      = ["amazon"]
