@@ -5,7 +5,7 @@ resource "aws_instance" "vault-node" {
   subnet_id            = module.vpc.private_subnets[0]
   key_name             = "helecloud"
   iam_instance_profile = aws_iam_instance_profile.vault-nodes.name
-  security_groups      = [aws_security_group.vault-nodes.name]
+  security_groups      = [aws_security_group.vault-nodes.id]
 
   tags = {
     "Name"         = "vault-node${count.index}"
