@@ -1,7 +1,7 @@
 ---
-vault_version: "0.11.1"
-vault_checksum: "sha256:eb8d2461d0ca249c1f91005f878795998bdeafccfde0b9bae82343541ce65996"
-vault_install_prerequisites: ['unzip']
+vault_version: "1.2.3"
+vault_checksum: "sha256:fe15676404aff35cb45f7c957f90491921b9269d79a8f933c5a36e26a431bfc4"
+vault_install_prerequisites: []
 vault_user: "vault"
 vault_group: "vault"
 vault_config_path: "/etc/vault.hcl"

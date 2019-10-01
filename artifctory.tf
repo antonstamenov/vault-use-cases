@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "artifacts" {
 
   lifecycle_rule {
     id      = "retire-old-versions"
-    enabled = false
+    enabled = true
     noncurrent_version_transition {
       days          = 30
       storage_class = "GLACIER"
