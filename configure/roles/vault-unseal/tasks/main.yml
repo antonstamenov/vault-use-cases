@@ -1,4 +1,4 @@
-- name: Check if not inited
+- name: Check if sealed
   shell: vault status -format json
   environment:
     VAULT_ADDR: "http://127.0.0.1:8200"
@@ -9,15 +9,14 @@
   set_fact:
     vault_status_parsed: "{{ vault_status.stdout | from_json }}"
 
-- meta: end_play
-  when: not ansible_facts['vault_status_parsed.sealed']
-
 - name: Reading unseal key contents
   command: cat {{item}}
   register: unseal_keys
   with_fileglob: "{{ unseal_keys_dir_output }}/*"
   delegate_to: localhost
   become: no
+  when: ansible_facts['vault_status_parsed'].sealed
+
 
 - name: Unseal vault with unseal keys
   shell: |
@@ -25,3 +24,4 @@
   environment:
     VAULT_ADDR: "http://127.0.0.1:8200"
   with_items: "{{unseal_keys.results}}"
+  when: ansible_facts['vault_status_parsed'].sealed
