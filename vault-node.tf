@@ -1,12 +1,11 @@
 resource "aws_instance" "vault-node" {
-  count                = 1
-  ami                  = data.aws_ami.amazon-linux-2.image_id
-  instance_type        = "t2.micro"
-  subnet_id            = module.vpc.private_subnets[0]
-  key_name             = "helecloud"
-  iam_instance_profile = aws_iam_instance_profile.vault-nodes.name
-  security_groups      = [aws_security_group.vault-nodes.id]
-
+  count                  = 1
+  ami                    = data.aws_ami.amazon-linux-2.image_id
+  instance_type          = "t2.micro"
+  subnet_id              = module.vpc.private_subnets[0]
+  key_name               = "helecloud"
+  iam_instance_profile   = aws_iam_instance_profile.vault-nodes.name
+  vpc_security_group_ids = [aws_security_group.vault-nodes.id]
   tags = {
     "Name"         = "vault-node${count.index}"
     "VaultCluster" = "vault-use-cases"
