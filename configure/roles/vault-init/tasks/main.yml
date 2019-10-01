@@ -1,3 +1,16 @@
+- name: Check if not inited
+  shell: vault status -format json
+  environment:
+    VAULT_ADDR: "http://127.0.0.1:8200"
+  register: vault_status
+
+- name: Parse output of vault status
+  set_fact:
+    vault_status_parsed: "{{ vault_status.stdout | from_json }}"
+
+- meta: end_play
+  when: ansible_facts['vault_status_parsed.initialized']
+
 - name: Create unseal directories
   file:
     path: "{{ unseal_keys_dir_output }}"
