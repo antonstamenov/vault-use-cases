@@ -1,5 +1,5 @@
 resource "aws_instance" "vault-node" {
-  count                  = 1
+  count                  = 2
   ami                    = data.aws_ami.amazon-linux-2.image_id
   instance_type          = "t2.micro"
   subnet_id              = module.vpc.private_subnets[0]
