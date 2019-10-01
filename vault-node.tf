@@ -12,6 +12,7 @@ resource "aws_instance" "vault-node" {
     "VaultCluster" = "vault-use-cases"
     "Environment"  = "poc"
   }
+  depends_on = [aws_security_group.vault-nodes]
 }
 
 resource "aws_security_group" "vault-nodes" {
